@@ -3,15 +3,16 @@
 require_relative "lib/web_scraping_hw3/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "web_scraping_hw3"
-  spec.version       = WebScrapingHw3::VERSION
-  spec.authors       = ["Vichisorn"]
-  spec.email         = ["james31366@gmail.com"]
+  spec.name = "web_scraping_hw3"
+  spec.version = WebScrapingHw3::VERSION
+  spec.authors = ["Vichisorn Wejsupakul"]
+  spec.email = ["james31366@gmail.com"]
 
-  spec.summary       = "Web Scraping for Set website"
-  spec.description   = "This gem is web scraping from assignment 2 in Soft spec design lab"
-  spec.homepage      = "https://github.com/james31366/Web-Scraping-HW3-SSD"
-  spec.license       = "MIT"
+  spec.summary = "Web Scraping for Set website"
+  spec.description = "This gem is web scraping from assignment 2 in Soft spec design lab."\
+                     "This gem is created by 6210546013 Vichisorn Wejsupakul"
+  spec.homepage = "https://github.com/james31366/Web-Scraping-HW3-SSD"
+  spec.license = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
 
   spec.metadata["homepage_uri"] = spec.homepage
@@ -23,8 +24,8 @@ Gem::Specification.new do |spec|
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{\A(?:test|spec|features)/}) }
   end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
+  spec.bindir = "exe"
+  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   # Dependency gem
