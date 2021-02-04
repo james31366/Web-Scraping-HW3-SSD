@@ -7,11 +7,16 @@ require "httparty"
 
 require_relative "web_scraping_hw3/version"
 
+# Use to Scraping the website of set to find the asset of all corporation.
 module WebScrapingHw3
   class Error < StandardError; end
 
   BASE_URL = "https://www.set.or.th"
 
+  # Convert any url link from string to nokogiri html.
+  # To use with any nokogiri tools.
+  # @param [String] url
+  # @return [HTML]
   def make_parsed(url)
     unparsed_page = HTTParty.get(url)
     Nokogiri::HTML(unparsed_page.body)

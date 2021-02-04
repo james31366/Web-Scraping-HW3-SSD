@@ -10,3 +10,7 @@ gem "rake", "~> 13.0"
 gem "minitest", "~> 5.0"
 
 gem "rubocop", "~> 1.7"
+
+gem "httparty", "~> 0.18.1"
+
+gem "nokogiri", "~> 1.11.1"
