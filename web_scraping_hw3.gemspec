@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Vichisorn Wejsupakul
+# 6210546013
+
 require_relative "lib/web_scraping_hw3/version"
 
 Gem::Specification.new do |spec|
