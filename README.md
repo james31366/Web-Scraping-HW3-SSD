@@ -21,7 +21,10 @@ Or install it yourself as:
 
 ## Usage
 
-No usage of this gem for now.
+You can run all of the this ruby by
+```ruby
+WebScrapingHw3::Scrape.main_scrape
+```
 
 ## Development
 

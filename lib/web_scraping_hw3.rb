@@ -13,31 +13,56 @@ module WebScrapingHw3
 
   BASE_URL = "https://www.set.or.th"
 
-  # Convert any url link from string to nokogiri html.
-  # To use with any nokogiri tools.
-  # @param [String] url
-  # @return [HTML]
-  def make_parsed(url)
-    unparsed_page = HTTParty.get(url)
-    Nokogiri::HTML(unparsed_page.body)
-  end
+  # Class to Scrape the set website
+  class Scrape
+    # Main function to scrape website.
+    # and print the corporation name and asset cost.
+    # @return [nil]
+    def self.main_scrape
+      url = "#{BASE_URL}/set/commonslookup.do"
+      companies_pages = self.find_companies_page(url)
 
-  url = "#{BASE_URL}/set/commonslookup.do"
-  parsed_page = make_parsed(url)
-  companies_pages = parsed_page.css("div.col-xs-12.padding-top-10.text-center.capital-letter").css("a")
+      companies_pages.each do |companies_page|
+        companies_table = self.find_companies_table(companies_page)
 
-  companies_pages.each do |companies_page|
-    companies_url = "#{BASE_URL}#{companies_page.attributes["href"].value}"
-    companies_parsed_page = make_parsed(companies_url)
-    companies_table = companies_parsed_page.css("table.table-profile.table-hover.table-set-border-yellow").css("a")
+        companies_table.each do |company_tag_a|
+          url_stock_highlight_page = self.find_company_highlight(company_tag_a)
+          stock_url = "#{BASE_URL}#{url_stock_highlight_page}"
+          self.print_asset(stock_url)
+        end
+      end
+    end
 
-    companies_table.each do |company_tag_a|
-      url_stock_profile_page = "#{BASE_URL}#{company_tag_a.attributes["href"].value}"
-      stock_profile_page = make_parsed(url_stock_profile_page)
-      url_stock_highlight_page = stock_profile_page.css("ul.nav.nav-tabs.set-nav-tabs")
-                                                   .css("a")[1].attributes["href"].value
+    private
 
-      stock_url = "#{BASE_URL}#{url_stock_highlight_page}"
+    def self.find_companies_page(url)
+      parsed_page = make_parsed(url)
+      parsed_page.css("div.col-xs-12.padding-top-10.text-center.capital-letter").css("a")
+    end
+
+    def self.find_companies_table(companies_page)
+      companies_url = "#{BASE_URL}#{companies_page.attributes["href"].value}"
+      companies_parsed_page = make_parsed(companies_url)
+      companies_parsed_page.css("table.table-profile.table-hover.table-set-border-yellow").css("a")
+    end
+
+    # Convert any url link from string to nokogiri html.
+    # To use with any nokogiri tools.
+    # @param [String] url
+    # @return [HTML]
+    def self.make_parsed(url)
+      unparsed_page = HTTParty.get(url)
+      Nokogiri::HTML(unparsed_page.body)
+    end
+
+    def self.find_company_highlight(company_tag_a)
+      stock_profile_page_url = "#{BASE_URL}#{company_tag_a.attributes["href"].value}"
+      stock_profile_page = make_parsed(stock_profile_page_url)
+      stock_profile_page.css("ul.nav.nav-tabs.set-nav-tabs")
+                        .css("a")[1].attributes["href"].value
+    end
+
+    def self.print_asset(stock_url)
       stock_parsed_page = make_parsed(stock_url)
 
       name = stock_parsed_page.css("div.col-xs-12.col-md-12.col-lg-8").css("h3").text
