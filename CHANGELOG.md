@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.4] - 2021-02-05
+
 ### Fixed
 
 - fixed the bundle that need to install bundler version 1.7
