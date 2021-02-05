@@ -20,20 +20,18 @@ module WebScrapingHw3
     # @return [nil]
     def self.main_scrape
       url = "#{BASE_URL}/set/commonslookup.do"
-      companies_pages = self.find_companies_page(url)
+      companies_pages = find_companies_page(url)
 
       companies_pages.each do |companies_page|
-        companies_table = self.find_companies_table(companies_page)
+        companies_table = find_companies_table(companies_page)
 
         companies_table.each do |company_tag_a|
-          url_stock_highlight_page = self.find_company_highlight(company_tag_a)
+          url_stock_highlight_page = find_company_highlight(company_tag_a)
           stock_url = "#{BASE_URL}#{url_stock_highlight_page}"
-          self.print_asset(stock_url)
+          print_asset(stock_url)
         end
       end
     end
-
-    private
 
     def self.find_companies_page(url)
       parsed_page = make_parsed(url)

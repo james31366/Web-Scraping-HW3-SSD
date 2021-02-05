@@ -7,6 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- Remove self redundant.
+- Correct style of code to rubocop
+
 ## [0.1.2] - 2021-02-05
 
 ### Added
